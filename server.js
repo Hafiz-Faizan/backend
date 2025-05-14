@@ -17,8 +17,16 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-// Middleware
-app.use(cors());
+// CORS Configuration
+const corsOptions = {
+  origin: '*', // Allow all origins
+  methods: 'GET,OPTIONS,PATCH,DELETE,POST,PUT',
+  allowedHeaders: 'X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version, Authorization',
+  credentials: true
+};
+
+// Apply CORS middleware with configuration
+app.use(cors(corsOptions));
 app.use(express.json());
 
 // Connect to MongoDB
